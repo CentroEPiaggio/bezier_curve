@@ -10,4 +10,4 @@ A package to build 2D Bezier curves, which can be used to slide objects on surfa
 Dependencies
 ------------
 
-This package depends on [some other](https://bitbucket.org/some_other_package) package, but don't know that yet.
+This package depends on [Eigen](http://eigen.tuxfamily.org/index.php?title=Main_Page) libaries, and [rviz_visual_tools](https://github.com/davetcoleman/rviz_visual_tools) (for test and visualization purposes only - can be obtained from synaptic).

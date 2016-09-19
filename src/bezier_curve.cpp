@@ -79,11 +79,11 @@ BezierCurve::Point BezierCurve::compute_bezier_curve(const BezierCurve::Coeffici
     
     // regular case: iterate among powers of t and u=(1-t)
     BezierCurve::CoefficientVector cc(c);
-    double tn = std::pow(t,order_here-1);
+    double un = std::pow(u,order_here-1);
     for(int i = 0; i<order_here; i++)
     {
-        cc(i) *= tn;
-        tn = tn/t*u;
+        cc(i) *= un;
+        un = un/u*t;
     }
     return pts*cc;
 }

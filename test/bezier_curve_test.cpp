@@ -32,7 +32,7 @@ void printStuff(BezierCurve::PointVector& cp1, BezierCurve& bc, rviz_visual_tool
     cp1b = cp1;
     bc.init_curve(cp1b);
     for(int i=0; i<cp1.cols(); ++i)
-        visual_tools_->publishSphere(cp1.col(i),rviz_visual_tools::colors::RED,rviz_visual_tools::scales::xxLARGE);
+        visual_tools_->publishSphere(cp1.col(i),rviz_visual_tools::colors::RED,rviz_visual_tools::scales::XXLARGE);
     for(double t=0.0; t<=1.0; t+=1.0/num_samples)
     {
         // compute and publish a point on the curve
@@ -114,7 +114,15 @@ int main(int argc, char** argv)
            2, 3, 4, 4, 3, 2;
     printStuff(cp1,bc,visual_tools_,20);
     
-    if(!visual_tools_->triggerBatchPublish())
+    bool res = false;
+    
+    // perform batch publish differently depending on ROS version (1.12.6 is kinetic)
+#if ROS_VERSION_MINIMUM(1,12,6)
+    res = visual_tools_->trigger();
+#else
+    res = visual_tools_->triggerBatchPublish();
+#endif
+    if(!res)
     {
         ROS_WARN_STREAM("Unable to publish batch markers!");
     }
